@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import HackerBackground from './HackerBackground';
 import CustomCursor from './CustomCursor';
+import ScrollToTop from './ScrollToTop';
 
 const Layout = () => {
   return (
@@ -11,6 +12,8 @@ const Layout = () => {
       <HackerBackground />
       <CustomCursor />
       <div className="relative z-10 flex flex-col min-h-screen">
+        {/* ScrollToTop è ora sicuramente sotto il Router */}
+        <ScrollToTop />
         <Navbar />
         <main className="flex-grow">
           <Outlet />
