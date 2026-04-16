@@ -4,13 +4,21 @@ import { MessageSquare, Send, Mail, MapPin, Phone, ChevronDown } from 'lucide-re
 import { useLanguage } from '../context/LanguageContext';
 
 const Contact = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [formState, setFormState] = useState({
     name: '',
-    email: '',
+    subject: '',
     message: ''
   });
+
+  const subjectOptions = [
+    { value: 'info', labelIt: 'Informazioni', labelEn: 'Information' },
+    { value: 'preventivo', labelIt: 'Richiesta preventivo', labelEn: 'Quote request' },
+    { value: 'collaborazione', labelIt: 'Collaborazione', labelEn: 'Collaboration' },
+    { value: 'supporto', labelIt: 'Supporto tecnico', labelEn: 'Technical support' },
+    { value: 'altro', labelIt: 'Altro', labelEn: 'Other' }
+  ];
 
   const faqs = [
     { q: t('contact.faq.q1'), a: t('contact.faq.a1') },
@@ -21,8 +29,10 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = `${t('contact.form.btn')} da ${formState.name}`;
-    const body = `${t('contact.form.name')}: ${formState.name}\n${t('contact.form.email')}: ${formState.email}\n\n${t('contact.form.msg')}:\n${formState.message}`;
+    const selectedSubject = subjectOptions.find(opt => opt.value === formState.subject);
+    const subjectLabel = selectedSubject ? (language === 'it' ? selectedSubject.labelIt : selectedSubject.labelEn) : formState.subject;
+    const subject = `${subjectLabel} - ${formState.name}`;
+    const body = `${t('contact.form.name')}: ${formState.name}\n\n${t('contact.form.msg')}:\n${formState.message}`;
     window.location.href = `mailto:federico.messineo.ai@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
@@ -102,15 +112,26 @@ const Contact = () => {
                   />
                 </div>
                 <div className="group">
-                  <label className="font-mono text-[10px] uppercase tracking-widest text-white/40 block mb-2 transition-colors group-focus-within:text-brand">{t('contact.form.email')}</label>
-                  <input 
-                    type="email" 
-                    required
-                    value={formState.email}
-                    onChange={(e) => setFormState({...formState, email: e.target.value})}
-                    placeholder={t('contact.form.placeholder.email')}
-                    className="w-full bg-transparent border-0 border-b border-white/20 py-3 px-0 focus:ring-0 focus:border-brand transition-all text-white placeholder:text-white/10 font-mono text-sm"
-                  />
+                  <label className="font-mono text-[10px] uppercase tracking-widest text-white/40 block mb-2 transition-colors group-focus-within:text-brand">{t('contact.form.subject')}</label>
+                  <div className="relative">
+                    <select 
+                      required
+                      value={formState.subject}
+                      onChange={(e) => setFormState({...formState, subject: e.target.value})}
+                      className="w-full bg-transparent border-0 border-b border-white/20 py-3 px-0 focus:ring-0 focus:border-brand transition-all text-white font-mono text-sm appearance-none cursor-pointer"
+                      style={{ backgroundImage: 'none' }}
+                    >
+                      <option value="" disabled className="bg-surface-muted text-white/40">{t('contact.form.placeholder.subject')}</option>
+                      {subjectOptions.map((option) => (
+                        <option key={option.value} value={option.value} className="bg-surface-muted text-white">
+                          {language === 'it' ? option.labelIt : option.labelEn}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <ChevronDown size={16} className="text-white/40" />
+                    </div>
+                  </div>
                 </div>
                 <div className="group">
                   <label className="font-mono text-[10px] uppercase tracking-widest text-white/40 block mb-2 transition-colors group-focus-within:text-brand">{t('contact.form.msg')}</label>
