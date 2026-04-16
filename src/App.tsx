@@ -12,7 +12,7 @@ import { LanguageProvider } from './context/LanguageContext';
 export default function App() {
   return (
     <LanguageProvider>
-      <BrowserRouter basename="/fred-studio-portfolio">
+      <BrowserRouter basename="/">
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>
