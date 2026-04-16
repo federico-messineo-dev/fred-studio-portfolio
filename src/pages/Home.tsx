@@ -206,10 +206,9 @@ const Home = () => {
             className="relative aspect-video bg-surface-bright border border-white/10 overflow-hidden"
           >
             <img 
-              src="https://picsum.photos/seed/federico-about/1200/800" 
-              alt="Federico Workspace" 
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=800&fit=crop&q=80" 
+              alt="Developer Workspace" 
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              referrerPolicy="no-referrer"
             />
           </motion.div>
         </div>

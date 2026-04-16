@@ -30,10 +30,16 @@ const Footer = () => {
           <div>
             <h4 className="font-mono text-xs text-brand uppercase tracking-widest mb-8">&gt; {t('footer.links')}</h4>
             <ul className="space-y-4">
-              {['Home', 'About', 'Services', 'Portfolio', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a href={`/${item.toLowerCase() === 'home' ? '' : item.toLowerCase()}`} className="text-white/60 hover:text-brand transition-colors font-display text-lg flex items-center gap-2 group">
-                    {item} <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all -translate-y-1 translate-x-1" />
+              {[
+                { label: 'Home', path: '/' },
+                { label: 'About', path: '/chi-sono' },
+                { label: 'Services', path: '/servizi' },
+                { label: 'Portfolio', path: '/portfolio' },
+                { label: 'Contact', path: '/contatti' }
+              ].map((item) => (
+                <li key={item.label}>
+                  <a href={item.path} className="text-white/60 hover:text-brand transition-colors font-display text-lg flex items-center gap-2 group">
+                    {item.label} <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all -translate-y-1 translate-x-1" />
                   </a>
                 </li>
               ))}
@@ -45,8 +51,8 @@ const Footer = () => {
             <h4 className="font-mono text-xs text-brand uppercase tracking-widest mb-8">&gt; SOCIAL</h4>
             <div className="flex flex-wrap gap-4">
               {[
-                { icon: <Github size={20} />, label: "GitHub", href: "#" },
-                { icon: <Linkedin size={20} />, label: "LinkedIn", href: "#" },
+              { icon: <Github size={20} />, label: "GitHub", href: "https://github.com/federico-messineo-dev/" },
+              { icon: <Linkedin size={20} />, label: "LinkedIn", href: "https://www.linkedin.com/in/federico-messineo/" },
                 { icon: <MessageSquare size={20} />, label: "WhatsApp", href: "https://wa.me/393701053179" }
               ].map((social, i) => (
                 <a 

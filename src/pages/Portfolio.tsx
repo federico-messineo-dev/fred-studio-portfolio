@@ -31,25 +31,25 @@ const Portfolio = () => {
               {
                 title: "La Veranda da Simona",
                 tags: t('portfolio.p1.tags'),
-                img: "https://picsum.photos/seed/veranda/1200/800",
+                img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&h=800&fit=crop&q=80",
                 type: "CASE_STUDY"
               },
               {
                 title: "AI Logistics Hub",
                 tags: t('portfolio.p2.tags'),
-                img: "https://picsum.photos/seed/logistics/1200/800",
+                img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=800&fit=crop&q=80",
                 type: "ENTERPRISE"
               },
               {
                 title: "Crypto Dashboard",
                 tags: t('portfolio.p3.tags'),
-                img: "https://picsum.photos/seed/crypto/1200/800",
+                img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=800&fit=crop&q=80",
                 type: "FINTECH"
               },
               {
                 title: "Smart Home Controller",
                 tags: t('portfolio.p4.tags'),
-                img: "https://picsum.photos/seed/home/1200/800",
+                img: "https://images.unsplash.com/photo-1558002038-1055907df827?w=1200&h=800&fit=crop&q=80",
                 type: "IOT"
               }
             ].map((project, i) => (
@@ -59,19 +59,15 @@ const Portfolio = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: i * 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-                className="group cursor-pointer"
+                className="group"
               >
                 <div className="relative aspect-video overflow-hidden mb-6 bg-surface-bright border border-white/10">
                   <img 
                     src={project.img} 
                     alt={project.title} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80"
-                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute top-4 right-4 bg-surface px-3 py-1 font-mono text-[10px] text-brand border border-brand/20">{project.type}</div>
-                  <div className="absolute inset-0 bg-brand/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <ExternalLink className="text-black" size={40} />
-                  </div>
                 </div>
                 <h3 className="font-display text-3xl font-bold mb-2 group-hover:text-brand transition-colors">{project.title}</h3>
                 <p className="font-mono text-xs text-white/40 uppercase tracking-widest">{project.tags}</p>
@@ -97,19 +93,19 @@ const Portfolio = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                name: "Marco Rossi",
+                name: "Alessandro Esposito",
                 role: "CEO @ TechFlow",
                 text: t('portfolio.test.t1.text'),
                 rating: 5
               },
               {
-                name: "Elena Bianchi",
+                name: "Giulia Ferraro",
                 role: "Marketing Manager @ CreativeHub",
                 text: t('portfolio.test.t2.text'),
                 rating: 5
               },
               {
-                name: "Giuseppe Verdi",
+                name: "Matteo Lombardo",
                 role: "Founder @ GreenStart",
                 text: t('portfolio.test.t3.text'),
                 rating: 5
@@ -127,7 +123,7 @@ const Portfolio = () => {
                   {[...Array(t.rating)].map((_, j) => <Star key={j} size={16} className="fill-brand text-brand" />)}
                 </div>
                 <p className="text-white/60 italic mb-8 leading-relaxed group-hover:text-white transition-colors">"{t.text}"</p>
-                <div>
+                <div className="flex flex-col">
                   <h4 className="font-display font-bold text-lg">{t.name}</h4>
                   <p className="font-mono text-xs text-brand uppercase">{t.role}</p>
                 </div>
