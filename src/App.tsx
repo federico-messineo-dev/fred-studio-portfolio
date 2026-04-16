@@ -12,7 +12,7 @@ import { LanguageProvider } from './context/LanguageContext';
 export default function App() {
   return (
     <LanguageProvider>
-      <BrowserRouter basename={process.env.VERCEL ? '/' : '/fred-studio-portfolio/'}>
+      <BrowserRouter>
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>
