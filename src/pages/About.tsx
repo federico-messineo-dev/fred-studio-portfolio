@@ -18,8 +18,8 @@ const About = () => {
             className="relative aspect-square bg-surface-bright border border-white/10 p-4"
           >
             <img 
-              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=800&fit=crop&q=80" 
-              alt="Developer Workspace" 
+              src="https://images.unsplash.com/photo-1517694712202-54dd79768f4b?w=800&h=800&fit=crop&q=80" 
+              alt="Code on Screen"
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />
             <div className="absolute -bottom-6 -right-6 w-32 h-32 border border-brand/30 bg-surface flex items-center justify-center p-4">
