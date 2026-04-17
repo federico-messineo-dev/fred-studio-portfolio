@@ -35,21 +35,26 @@ const CustomCursor = () => {
     };
   }, [cursorX, cursorY]);
 
+  // Rimuovi il cerchietto verde e il delay solo su mobile e tablet
+  const isMobileOrTablet = window.innerWidth <= 768;
+
   return (
     <>
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-brand/50 rounded-full pointer-events-none z-[9999] mix-blend-difference"
-        style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
-        animate={{
-          scale: isHovering ? 2 : 1,
-          backgroundColor: isHovering ? 'rgba(0, 253, 135, 0.1)' : 'transparent',
-        }}
-      />
+      {!isMobileOrTablet && (
+        <motion.div
+          className="fixed top-0 left-0 w-8 h-8 border border-brand/50 rounded-full pointer-events-none z-[9999] mix-blend-difference"
+          style={{
+            x: cursorXSpring,
+            y: cursorYSpring,
+            translateX: '-50%',
+            translateY: '-50%',
+          }}
+          animate={{
+            scale: isHovering ? 2 : 1,
+            backgroundColor: isHovering ? 'rgba(0, 253, 135, 0.1)' : 'transparent',
+          }}
+        />
+      )}
       <motion.div
         className="fixed top-0 left-0 w-1.5 h-1.5 bg-brand rounded-full pointer-events-none z-[9999]"
         style={{
