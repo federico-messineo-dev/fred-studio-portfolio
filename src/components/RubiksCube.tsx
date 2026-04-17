@@ -177,6 +177,8 @@ const onTouchStart = (e: TouchEvent) => {
   // On touch devices (mobile/tablet), do nothing - just let the cube auto-rotate
   if (isTouchDevice()) {
     e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
     return;
   }
   startD(e.touches[0].clientX, e.touches[0].clientY);
@@ -185,6 +187,8 @@ const onTouchMove = (e: TouchEvent) => {
   // On touch devices (mobile/tablet), do nothing - just let the cube auto-rotate
   if (isTouchDevice()) {
     e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
     return;
   }
   if (!drag) return;
@@ -193,6 +197,9 @@ const onTouchMove = (e: TouchEvent) => {
 const onTouchEnd = (e: TouchEvent) => {
   // On touch devices (mobile/tablet), do nothing - just let the cube auto-rotate
   if (isTouchDevice()) {
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
     return;
   }
   endD();
