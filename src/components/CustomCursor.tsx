@@ -55,15 +55,17 @@ const CustomCursor = () => {
           }}
         />
       )}
-      <motion.div
-        className="fixed top-0 left-0 w-1.5 h-1.5 bg-brand rounded-full pointer-events-none z-[9999]"
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
-      />
+      {!isMobileOrTablet && (
+        <motion.div
+          className="fixed top-0 left-0 w-1.5 h-1.5 bg-brand rounded-full pointer-events-none z-[9999]"
+          style={{
+            x: cursorX,
+            y: cursorY,
+            translateX: '-50%',
+            translateY: '-50%',
+          }}
+        />
+      )}
     </>
   );
 };
