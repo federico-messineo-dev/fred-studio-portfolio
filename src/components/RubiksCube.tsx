@@ -175,36 +175,38 @@ const isTablet = () => {
 };
 
 const onTouchStart = (e: TouchEvent) => {
-  // On tablets, prevent default but don't stop propagation to avoid canvas removal
-  if (isTablet()) {
-    e.preventDefault();
-    return;
-  }
-  // On phones, prevent default and stop propagation
-  if (isTouchDevice() && !isTablet()) {
-    e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-    return;
+  // Only prevent default if the touch is on the cube canvas
+  if (e.target === renderer.domElement) {
+    if (isTablet()) {
+      e.preventDefault();
+      return;
+    }
+    if (isTouchDevice() && !isTablet()) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      return;
+    }
   }
   drag = true;
   prev = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   autoRot = false;
 };
 const onTouchMove = (e: TouchEvent) => {
-  // On tablets, prevent default and stop propagation to avoid canvas removal
-  if (isTablet()) {
-    e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-    return;
-  }
-  // On phones, prevent default and stop propagation
-  if (isTouchDevice() && !isTablet()) {
-    e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-    return;
+  // Only prevent default if the touch is on the cube canvas
+  if (e.target === renderer.domElement) {
+    if (isTablet()) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      return;
+    }
+    if (isTouchDevice() && !isTablet()) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      return;
+    }
   }
   if (!drag) return;
   cg.rotation.y += (e.touches[0].clientX - prev.x) * 0.009;
@@ -212,17 +214,18 @@ const onTouchMove = (e: TouchEvent) => {
   prev = { x: e.touches[0].clientX, y: e.touches[0].clientY };
 };
 const onTouchEnd = (e: TouchEvent) => {
-  // On tablets, prevent default but don't stop propagation
-  if (isTablet()) {
-    e.preventDefault();
-    return;
-  }
-  // On phones, prevent default and stop propagation
-  if (isTouchDevice() && !isTablet()) {
-    e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-    return;
+  // Only prevent default if the touch is on the cube canvas
+  if (e.target === renderer.domElement) {
+    if (isTablet()) {
+      e.preventDefault();
+      return;
+    }
+    if (isTouchDevice() && !isTablet()) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      return;
+    }
   }
   drag = false;
   autoRot = true;
