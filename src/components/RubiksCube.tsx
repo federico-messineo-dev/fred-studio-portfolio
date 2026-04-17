@@ -169,24 +169,28 @@ const RubiksCube: React.FC = () => {
     const onMouseMove = (e: MouseEvent) => moveD(e.clientX, e.clientY);
     const onMouseUp = () => endD();
 
-    const onTouchStart = (e: TouchEvent) => {
-      const t = e.touches;
-      startD(t.clientX, t.clientY);
-    };
-    const onTouchMove = (e: TouchEvent) => {
-      if (!drag) return;
-      const t = e.touches;
-      moveD(t.clientX, t.clientY);
-    };
-    const onTouchEnd = () => endD();
+const onTouchStart = (e: TouchEvent) => {
+  // On mobile, do nothing - just let the cube auto-rotate
+  e.preventDefault();
+  return;
+};
+const onTouchMove = (e: TouchEvent) => {
+  // On mobile, do nothing - just let the cube auto-rotate
+  e.preventDefault();
+  return;
+};
+const onTouchEnd = () => {
+  // On mobile, do nothing - just let the cube auto-rotate
+  return;
+};
 
     const cnv = renderer.domElement;
     cnv.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseup', onMouseUp);
-    cnv.addEventListener('touchstart', onTouchStart, { passive: true });
-    window.addEventListener('touchmove', onTouchMove, { passive: true });
-    window.addEventListener('touchend', onTouchEnd);
+cnv.addEventListener('touchstart', onTouchStart, { passive: true });
+window.addEventListener('touchmove', onTouchMove, { passive: true });
+window.addEventListener('touchend', onTouchEnd);
 
     const ro = new ResizeObserver(() => {
       renderer.setSize(W(), H());
