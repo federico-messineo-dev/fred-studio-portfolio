@@ -196,9 +196,11 @@ const onTouchStart = (e: TouchEvent) => {
   startD(e.touches[0].clientX, e.touches[0].clientY);
 };
 const onTouchMove = (e: TouchEvent) => {
-  // On tablets, prevent default but don't stop propagation
+  // On tablets, prevent default and stop propagation to avoid canvas removal
   if (isTablet()) {
     e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
     return;
   }
   // On phones, prevent default and stop propagation
