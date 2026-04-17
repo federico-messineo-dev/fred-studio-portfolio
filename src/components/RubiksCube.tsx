@@ -169,19 +169,33 @@ const RubiksCube: React.FC = () => {
     const onMouseMove = (e: MouseEvent) => moveD(e.clientX, e.clientY);
     const onMouseUp = () => endD();
 
+const isTouchDevice = () => {
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+};
+
 const onTouchStart = (e: TouchEvent) => {
-  // On mobile, do nothing - just let the cube auto-rotate
-  e.preventDefault();
-  return;
+  // On touch devices (mobile/tablet), do nothing - just let the cube auto-rotate
+  if (isTouchDevice()) {
+    e.preventDefault();
+    return;
+  }
+  startD(e.touches[0].clientX, e.touches[0].clientY);
 };
 const onTouchMove = (e: TouchEvent) => {
-  // On mobile, do nothing - just let the cube auto-rotate
-  e.preventDefault();
-  return;
+  // On touch devices (mobile/tablet), do nothing - just let the cube auto-rotate
+  if (isTouchDevice()) {
+    e.preventDefault();
+    return;
+  }
+  if (!drag) return;
+  moveD(e.touches[0].clientX, e.touches[0].clientY);
 };
-const onTouchEnd = () => {
-  // On mobile, do nothing - just let the cube auto-rotate
-  return;
+const onTouchEnd = (e: TouchEvent) => {
+  // On touch devices (mobile/tablet), do nothing - just let the cube auto-rotate
+  if (isTouchDevice()) {
+    return;
+  }
+  endD();
 };
 
     const cnv = renderer.domElement;
