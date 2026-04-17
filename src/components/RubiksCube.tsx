@@ -147,27 +147,21 @@ const RubiksCube: React.FC = () => {
     let prev = { x: 0, y: 0 };
     let autoRot = true;
 
-    const startD = (x: number, y: number) => {
-      drag = true;
-      prev = { x, y };
-      autoRot = false;
-    };
-
-    const moveD = (x: number, y: number) => {
-      if (!drag) return;
-      cg.rotation.y += (x - prev.x) * 0.009;
-      cg.rotation.x += (y - prev.y) * 0.009;
-      prev = { x, y };
-    };
-
-    const endD = () => {
-      drag = false;
-      autoRot = true;
-    };
-
-    const onMouseDown = (e: MouseEvent) => startD(e.clientX, e.clientY);
-    const onMouseMove = (e: MouseEvent) => moveD(e.clientX, e.clientY);
-    const onMouseUp = () => endD();
+const onMouseDown = (e: MouseEvent) => {
+  drag = true;
+  prev = { x: e.clientX, y: e.clientY };
+  autoRot = false;
+};
+const onMouseMove = (e: MouseEvent) => {
+  if (!drag) return;
+  cg.rotation.y += (e.clientX - prev.x) * 0.009;
+  cg.rotation.x += (e.clientY - prev.y) * 0.009;
+  prev = { x: e.clientX, y: e.clientY };
+};
+const onMouseUp = () => {
+  drag = false;
+  autoRot = true;
+};
 
 const isTouchDevice = () => {
   return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -193,7 +187,9 @@ const onTouchStart = (e: TouchEvent) => {
     e.stopImmediatePropagation();
     return;
   }
-  startD(e.touches[0].clientX, e.touches[0].clientY);
+  drag = true;
+  prev = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  autoRot = false;
 };
 const onTouchMove = (e: TouchEvent) => {
   // On tablets, prevent default and stop propagation to avoid canvas removal
@@ -211,7 +207,9 @@ const onTouchMove = (e: TouchEvent) => {
     return;
   }
   if (!drag) return;
-  moveD(e.touches[0].clientX, e.touches[0].clientY);
+  cg.rotation.y += (e.touches[0].clientX - prev.x) * 0.009;
+  cg.rotation.x += (e.touches[0].clientY - prev.y) * 0.009;
+  prev = { x: e.touches[0].clientX, y: e.touches[0].clientY };
 };
 const onTouchEnd = (e: TouchEvent) => {
   // On tablets, prevent default but don't stop propagation
@@ -226,7 +224,8 @@ const onTouchEnd = (e: TouchEvent) => {
     e.stopImmediatePropagation();
     return;
   }
-  endD();
+  drag = false;
+  autoRot = true;
 };
 
     const cnv = renderer.domElement;
