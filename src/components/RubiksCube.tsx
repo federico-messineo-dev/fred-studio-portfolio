@@ -173,9 +173,21 @@ const isTouchDevice = () => {
   return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 };
 
+const isTablet = () => {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const diagonal = Math.sqrt(width * width + height * height);
+  return diagonal >= 768; // Tablets typically have larger screens
+};
+
 const onTouchStart = (e: TouchEvent) => {
-  // On touch devices (mobile/tablet), do nothing - just let the cube auto-rotate
-  if (isTouchDevice()) {
+  // On tablets, prevent default but don't stop propagation to avoid canvas removal
+  if (isTablet()) {
+    e.preventDefault();
+    return;
+  }
+  // On phones, prevent default and stop propagation
+  if (isTouchDevice() && !isTablet()) {
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();
@@ -184,8 +196,13 @@ const onTouchStart = (e: TouchEvent) => {
   startD(e.touches[0].clientX, e.touches[0].clientY);
 };
 const onTouchMove = (e: TouchEvent) => {
-  // On touch devices (mobile/tablet), do nothing - just let the cube auto-rotate
-  if (isTouchDevice()) {
+  // On tablets, prevent default but don't stop propagation
+  if (isTablet()) {
+    e.preventDefault();
+    return;
+  }
+  // On phones, prevent default and stop propagation
+  if (isTouchDevice() && !isTablet()) {
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();
@@ -195,8 +212,13 @@ const onTouchMove = (e: TouchEvent) => {
   moveD(e.touches[0].clientX, e.touches[0].clientY);
 };
 const onTouchEnd = (e: TouchEvent) => {
-  // On touch devices (mobile/tablet), do nothing - just let the cube auto-rotate
-  if (isTouchDevice()) {
+  // On tablets, prevent default but don't stop propagation
+  if (isTablet()) {
+    e.preventDefault();
+    return;
+  }
+  // On phones, prevent default and stop propagation
+  if (isTouchDevice() && !isTablet()) {
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();
