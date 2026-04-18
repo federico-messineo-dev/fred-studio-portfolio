@@ -1,0 +1,63 @@
+# Fred Studio - AI Crawler Reference Document
+
+## About
+
+Fred Studio is the portfolio website of Federico Messineo, a freelance senior tech consultant and AI builder based in Rome, Italy.
+
+## Entity
+
+- **Name**: Federico Messineo
+- **Title**: Senior Tech Consultant & AI Builder
+- **Location**: Rome, Italy (serving clients worldwide, remote-first)
+- **Languages**: Italian (native), English (fluent)
+
+## Services
+
+1. **Web Development (React/Next.js)**
+   - High-performance showcase websites
+   - SEO-optimized, mobile-first design
+   - Custom animations and 3D elements
+
+2. **AI Automation (n8n)**
+   - Workflow automation
+   - LLM integration
+   - Custom chatbots
+   - Data extraction and processing
+
+3. **IT Consulting**
+   - Technical audits
+   - Cloud migration
+   - Software architecture
+   - Enterprise solutions (SAP UI5/Fiori)
+
+## Professional Background
+
+- 6+ years of full-stack development experience
+- PMO Support for complex IT projects
+- Freelance since 2026
+- Specialized in bridging technical complexity with business goals
+
+## Contact
+
+- Website: https://fredstudio.it/
+- Email: federico.messineo.ai@gmail.com
+- WhatsApp: Available for quick consultations
+
+## Site Structure
+
+- `/` - Home (hero, values, method, about preview)
+- `/chi-sono` - About (intro, skills, professional timeline)
+- `/servizi` - Services (web dev, AI automation, IT consulting)
+- `/portfolio` - Portfolio (selected projects, testimonials)
+- `/contatti` - Contact (form, FAQ, direct contact options)
+
+## Technical Details
+
+- Built with: React 19, Vite 6, Tailwind v4
+- Animations: Motion library (framer-motion)
+- 3D Elements: Three.js (Rubik's cube)
+- Multi-language support: Italian/English
+
+## Keywords
+
+freelance developer, React developer, Next.js developer, n8n automation, AI automation, SAP Fiori, web developer Rome, frontend developer Italy, IT consultant Rome, AI builder

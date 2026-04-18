@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://fredstudio.it/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://fredstudio.it/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fredstudio.it/?lang=en" />
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://fredstudio.it/chi-sono</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://fredstudio.it/chi-sono" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fredstudio.it/chi-sono?lang=en" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fredstudio.it/servizi</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://fredstudio.it/servizi" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fredstudio.it/servizi?lang=en" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fredstudio.it/portfolio</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://fredstudio.it/portfolio" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fredstudio.it/portfolio?lang=en" />
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fredstudio.it/contatti</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://fredstudio.it/contatti" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fredstudio.it/contatti?lang=en" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

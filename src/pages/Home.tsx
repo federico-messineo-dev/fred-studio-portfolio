@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { motion } from 'motion/react';
 import { MessageSquare, Zap, Target, Shield, Rocket, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import RubiksCube from '../components/RubiksCube';
+
+const RubiksCube = lazy(() => import('../components/RubiksCube').then(m => ({ default: m.default })));
+
+const RubiksCubeLoader = () => (
+  <div className="w-full h-full flex items-center justify-center">
+    <div className="w-16 h-16 border-2 border-brand/20 border-t-brand animate-spin rounded-full" />
+  </div>
+);
 
 const Home = () => {
   const { t } = useLanguage();
@@ -64,7 +71,9 @@ const Home = () => {
             style={{ height: 'clamp(280px, 45vw, 520px)' }}
           >
             <div className="w-full max-w-md transform md:translate-x-6">
+              <Suspense fallback={<RubiksCubeLoader />}>
               <RubiksCube />
+            </Suspense>
             </div>
           </motion.div>
         </div>
