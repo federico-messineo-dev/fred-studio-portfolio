@@ -142,41 +142,56 @@ const RubiksCube: React.FC = () => {
 
     const scrambleTimer = setTimeout(scramble, 3000);
 
-    // Drag / touch
+    // Drag / touch with momentum
     let drag = false;
     let prev = { x: 0, y: 0 };
-    let autoRot = true;
+    let vel = { x: 0, y: 0 };
+    let flung = false;
+    const friction = 0.985;
+    const minVel = 0.0005;
 
 const onMouseDown = (e: MouseEvent) => {
   drag = true;
   prev = { x: e.clientX, y: e.clientY };
-  autoRot = false;
+  vel = { x: 0, y: 0 };
+  flung = false;
 };
 const onMouseMove = (e: MouseEvent) => {
   if (!drag) return;
-  cg.rotation.y += (e.clientX - prev.x) * 0.009;
-  cg.rotation.x += (e.clientY - prev.y) * 0.009;
+  const dx = e.clientX - prev.x;
+  const dy = e.clientY - prev.y;
+  cg.rotation.y += dx * 0.009;
+  cg.rotation.x += dy * 0.009;
+  vel = { x: dx * 0.009, y: dy * 0.009 };
   prev = { x: e.clientX, y: e.clientY };
 };
 const onMouseUp = () => {
   drag = false;
-  autoRot = true;
+  if (Math.abs(vel.x) > minVel || Math.abs(vel.y) > minVel) {
+    flung = true;
+  }
 };
 
 const onTouchStart = (e: TouchEvent) => {
   drag = true;
   prev = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-  autoRot = false;
+  vel = { x: 0, y: 0 };
+  flung = false;
 };
 const onTouchMove = (e: TouchEvent) => {
   if (!drag) return;
-  cg.rotation.y += (e.touches[0].clientX - prev.x) * 0.009;
-  cg.rotation.x += (e.touches[0].clientY - prev.y) * 0.009;
+  const dx = e.touches[0].clientX - prev.x;
+  const dy = e.touches[0].clientY - prev.y;
+  cg.rotation.y += dx * 0.009;
+  cg.rotation.x += dy * 0.009;
+  vel = { x: dx * 0.009, y: dy * 0.009 };
   prev = { x: e.touches[0].clientX, y: e.touches[0].clientY };
 };
 const onTouchEnd = () => {
   drag = false;
-  autoRot = true;
+  if (Math.abs(vel.x) > minVel || Math.abs(vel.y) > minVel) {
+    flung = true;
+  }
 };
 
     const cnv = renderer.domElement;
@@ -198,10 +213,16 @@ const onTouchEnd = () => {
     let rafId: number;
     (function loop() {
       rafId = requestAnimationFrame(loop);
-      if (autoRot && !isAnim) {
-        cg.rotation.y += 0.004;
-        cg.rotation.x =
-          0.3 + Math.sin(performance.now() * 0.0004) * 0.08;
+      if (flung && !isAnim) {
+        cg.rotation.y += vel.x;
+        cg.rotation.x += vel.y;
+        vel.x *= friction;
+        vel.y *= friction;
+        if (Math.abs(vel.x) < minVel && Math.abs(vel.y) < minVel) {
+          flung = false;
+        }
+      } else if (!drag && !flung && !isAnim) {
+        cg.rotation.y += 0.002;
       }
       renderer.render(scene, cam);
     })();
