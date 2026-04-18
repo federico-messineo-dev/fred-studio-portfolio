@@ -163,81 +163,30 @@ const onMouseUp = () => {
   autoRot = true;
 };
 
-const isTouchDevice = () => {
-  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-};
-
-const isTablet = () => {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  const diagonal = Math.sqrt(width * width + height * height);
-  return diagonal >= 768; // Tablets typically have larger screens
-};
-
 const onTouchStart = (e: TouchEvent) => {
-  // Only prevent default if the touch is on the cube canvas
-  if (e.target === renderer.domElement) {
-    if (isTablet()) {
-      e.preventDefault();
-      return;
-    }
-    if (isTouchDevice() && !isTablet()) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      return;
-    }
-  }
   drag = true;
   prev = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   autoRot = false;
 };
 const onTouchMove = (e: TouchEvent) => {
-  // Only prevent default if the touch is on the cube canvas
-  if (e.target === renderer.domElement) {
-    if (isTablet()) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      return;
-    }
-    if (isTouchDevice() && !isTablet()) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      return;
-    }
-  }
   if (!drag) return;
   cg.rotation.y += (e.touches[0].clientX - prev.x) * 0.009;
   cg.rotation.x += (e.touches[0].clientY - prev.y) * 0.009;
   prev = { x: e.touches[0].clientX, y: e.touches[0].clientY };
 };
-const onTouchEnd = (e: TouchEvent) => {
-  // Only prevent default if the touch is on the cube canvas
-  if (e.target === renderer.domElement) {
-    if (isTablet()) {
-      e.preventDefault();
-      return;
-    }
-    if (isTouchDevice() && !isTablet()) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      return;
-    }
-  }
+const onTouchEnd = () => {
   drag = false;
   autoRot = true;
 };
 
     const cnv = renderer.domElement;
+    cnv.style.touchAction = 'none';
     cnv.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseup', onMouseUp);
-cnv.addEventListener('touchstart', onTouchStart, { passive: true });
-window.addEventListener('touchmove', onTouchMove, { passive: true });
-window.addEventListener('touchend', onTouchEnd);
+    cnv.addEventListener('touchstart', onTouchStart, { passive: false });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchend', onTouchEnd);
 
     const ro = new ResizeObserver(() => {
       renderer.setSize(W(), H());
@@ -261,10 +210,8 @@ window.addEventListener('touchend', onTouchEnd);
       clearTimeout(scrambleTimer);
       cancelAnimationFrame(rafId);
       ro.disconnect();
-      cnv.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseup', onMouseUp);
-      cnv.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('touchend', onTouchEnd);
       renderer.dispose();
