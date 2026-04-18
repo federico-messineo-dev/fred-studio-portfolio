@@ -13,6 +13,10 @@
 }
 
 @layer base {
+  html {
+    overscroll-behavior: none;
+  }
+
   body {
     @apply bg-surface text-white font-sans selection:bg-brand selection:text-black cursor-none;
   }
