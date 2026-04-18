@@ -33,7 +33,7 @@ const Contact = () => {
     const subjectLabel = selectedSubject ? (language === 'it' ? selectedSubject.labelIt : selectedSubject.labelEn) : formState.subject;
     const subject = `${subjectLabel} - ${formState.name}`;
     const body = `${t('contact.form.name')}: ${formState.name}\n\n${t('contact.form.msg')}:\n${formState.message}`;
-    window.location.href = `mailto:federico.messineo.ai@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:fredstudio.digital@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
@@ -55,7 +55,7 @@ const Contact = () => {
               
               <div className="space-y-6 mb-12">
                 {[
-                  { icon: <Mail size={20} />, label: "Email", val: "federico.messineo.ai@gmail.com" },
+                  { icon: <Mail size={20} />, label: "Email", val: "fredstudio.digital@gmail.com" },
                   { icon: <Phone size={20} />, label: "Telefono", val: "+39 370 105 3179" },
                   { icon: <MapPin size={20} />, label: "Sede", val: "Roma, Italia / Remoto" }
                 ].map((item, i) => (

@@ -40,7 +40,7 @@ Fred Studio is the portfolio website of Federico Messineo, a freelance senior te
 ## Contact
 
 - Website: https://fredstudio.it/
-- Email: federico.messineo.ai@gmail.com
+- Email: fredstudio.digital@gmail.com
 - WhatsApp: Available for quick consultations
 
 ## Site Structure

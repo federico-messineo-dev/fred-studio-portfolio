@@ -119,7 +119,7 @@ const Services = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="font-display font-black text-4xl md:text-7xl tracking-tighter mb-12">{t('services.cta.title')}</h2>
           <a 
-            href="mailto:federico.messineo.ai@gmail.com" 
+            href="mailto:fredstudio.digital@gmail.com" 
             className="inline-flex items-center gap-4 bg-brand text-black font-mono font-bold px-12 py-6 text-lg hover:scale-105 transition-all"
           >
             {t('services.cta.btn')} <ArrowRight size={20} />
